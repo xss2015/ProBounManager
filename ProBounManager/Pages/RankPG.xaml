@@ -1,0 +1,55 @@
+﻿<Page x:Class="ProBounManager.Pages.RankPG"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProBounManager.Pages" xmlns:viewmodel="clr-namespace:ProBounManager.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:SettingVM}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" FlowDirection="RightToLeft"
+      Title="RankPG">
+
+    <Grid HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <GroupBox>
+            <GroupBox.Header>
+                <TextBlock Text="ادخال جديد" Style="{DynamicResource HeaderTextBlock}"/>
+            </GroupBox.Header>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="250"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="اسم الدرجة الوظيفية" Grid.Column="0" Grid.Row="0" Style="{DynamicResource Label}"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Style="{DynamicResource txtBox}" Margin="5" Text="{Binding Rank.RankName}"/>
+                <Label Content="عدد سنوات الخدمة" Grid.Column="0" Grid.Row="1" Style="{DynamicResource Label}"/>
+                <TextBox Grid.Column="1" Grid.Row="1"  Margin="5" Style="{DynamicResource txtBox}" Text="{Binding Rank.RankCount}"/>
+                <Button Name="btnSave" Content="حفظ" Grid.Column="1" Grid.Row="2" FontSize="20" FontWeight="Bold" Style="{DynamicResource SaveBtn}" Command="{Binding AddRankCommand}" />
+
+            </Grid>
+        </GroupBox>
+        <DataGrid x:Name="grid" Grid.Row="1"  FontSize="18" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="False" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+             FontFamily="Calibri"  SelectionMode="Single" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"  Margin="5" ItemsSource="{Binding Ranks}" DisplayMemberPath="RankName" SelectedValuePath="RankId" SelectedItem="{Binding SelectedRank}"   >
+            <DataGrid.Columns>
+                
+                <DataGridTextColumn Header="اسم الدرجة الوظيفية" Binding="{Binding RankName}"  />
+                <DataGridTextColumn Header="عدد سنوات الخدمة" Binding="{Binding RankCount}"  />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button  Name="btnEdit" Width="125"  FontSize="20" Content="حفظ التعديل" Style="{DynamicResource UpdBtn}" Command="{Binding EditRankCommand}" />
+            <Button Name="btnDel" Width="125"  FontSize="20" Content="حذف"  Style="{DynamicResource DelBtn}" Command="{Binding DelRankCommand}" />
+
+        </StackPanel>
+    </Grid>
+</Page>
